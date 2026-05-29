@@ -61,9 +61,12 @@ defmodule ReqLLM.Providers.CloudflareAIGatewayTest do
       original_gateway = System.get_env("CF_GATEWAY_ID")
 
       on_exit(fn ->
-        if original_account, do: System.put_env("CF_ACCOUNT_ID", original_account),
+        if original_account,
+          do: System.put_env("CF_ACCOUNT_ID", original_account),
           else: System.delete_env("CF_ACCOUNT_ID")
-        if original_gateway, do: System.put_env("CF_GATEWAY_ID", original_gateway),
+
+        if original_gateway,
+          do: System.put_env("CF_GATEWAY_ID", original_gateway),
           else: System.delete_env("CF_GATEWAY_ID")
       end)
 
@@ -84,9 +87,12 @@ defmodule ReqLLM.Providers.CloudflareAIGatewayTest do
       original_gateway = System.get_env("CF_GATEWAY_ID")
 
       on_exit(fn ->
-        if original_account, do: System.put_env("CF_ACCOUNT_ID", original_account),
+        if original_account,
+          do: System.put_env("CF_ACCOUNT_ID", original_account),
           else: System.delete_env("CF_ACCOUNT_ID")
-        if original_gateway, do: System.put_env("CF_GATEWAY_ID", original_gateway),
+
+        if original_gateway,
+          do: System.put_env("CF_GATEWAY_ID", original_gateway),
           else: System.delete_env("CF_GATEWAY_ID")
       end)
 
@@ -107,9 +113,12 @@ defmodule ReqLLM.Providers.CloudflareAIGatewayTest do
       original_gateway = System.get_env("CF_GATEWAY_ID")
 
       on_exit(fn ->
-        if original_account, do: System.put_env("CF_ACCOUNT_ID", original_account),
+        if original_account,
+          do: System.put_env("CF_ACCOUNT_ID", original_account),
           else: System.delete_env("CF_ACCOUNT_ID")
-        if original_gateway, do: System.put_env("CF_GATEWAY_ID", original_gateway),
+
+        if original_gateway,
+          do: System.put_env("CF_GATEWAY_ID", original_gateway),
           else: System.delete_env("CF_GATEWAY_ID")
       end)
 

@@ -80,7 +80,9 @@ defmodule ReqLLM.Providers.CloudflareAIGateway do
     user_opts_with_url = Keyword.put(user_opts, :base_url, base_url)
 
     request
-    |> then(&ReqLLM.Provider.Defaults.default_attach(__MODULE__, &1, model_input, user_opts_with_url))
+    |> then(
+      &ReqLLM.Provider.Defaults.default_attach(__MODULE__, &1, model_input, user_opts_with_url)
+    )
     |> inject_cf_headers(provider_opts)
   end
 
@@ -135,12 +137,12 @@ defmodule ReqLLM.Providers.CloudflareAIGateway do
           "#{default_base_url()}/#{account}/#{gateway}/openai"
         else
           raise ReqLLM.Error.Invalid.Parameter.exception(
-            parameter:
-              "Cloudflare AI Gateway requires cf_account_id and cf_gateway_id. " <>
-                "Set CF_ACCOUNT_ID + CF_GATEWAY_ID env vars, " <>
-                "pass cf_account_id/cf_gateway_id in provider_options, " <>
-                "or pass base_url directly."
-          )
+                  parameter:
+                    "Cloudflare AI Gateway requires cf_account_id and cf_gateway_id. " <>
+                      "Set CF_ACCOUNT_ID + CF_GATEWAY_ID env vars, " <>
+                      "pass cf_account_id/cf_gateway_id in provider_options, " <>
+                      "or pass base_url directly."
+                )
         end
     end
   end
