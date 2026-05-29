@@ -1,0 +1,70 @@
+{
+  "request": {
+    "body": {
+      "b64": "eyJtYXhfdG9rZW5zIjo1MCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJIZWxsbyB3b3JsZCEiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJncHQtNG8iLCJzZWVkIjo0Miwic3RyZWFtIjpmYWxzZSwidGVtcGVyYXR1cmUiOjAuMH0="
+    },
+    "canonical_json": {
+      "max_tokens": 50,
+      "messages": [
+        {
+          "content": "Hello world!",
+          "role": "user"
+        }
+      ],
+      "model": "gpt-4o",
+      "seed": 42,
+      "stream": false,
+      "temperature": 0.0
+    },
+    "headers": {
+      "accept-encoding": [
+        "gzip"
+      ],
+      "authorization": "[REDACTED:authorization]",
+      "content-type": [
+        "application/json"
+      ],
+      "user-agent": [
+        "req/0.5.15"
+      ]
+    },
+    "method": "post",
+    "url": "https://gateway.ai.cloudflare.com/v1/test-account/test-gateway/openai/chat/completions"
+  },
+  "response": {
+    "body": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "Hello! How can I assist you today?",
+            "role": "assistant"
+          }
+        }
+      ],
+      "created": 1762103726,
+      "id": "chatcmpl-cf-test-basic-001",
+      "model": "gpt-4o-2024-08-06",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 11,
+        "total_tokens": 20
+      }
+    },
+    "headers": {
+      "content-type": [
+        "application/json"
+      ],
+      "cf-aig-cache-status": [
+        "MISS"
+      ],
+      "date": [
+        "Sun, 02 Nov 2025 17:15:26 GMT"
+      ]
+    },
+    "status": 200
+  }
+}

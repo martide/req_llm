@@ -199,6 +199,7 @@ defmodule ReqLLM.Step.Fixture.Backend do
   defp provider_module(:amazon_bedrock), do: ReqLLM.Providers.AmazonBedrock
   defp provider_module(:anthropic), do: ReqLLM.Providers.Anthropic
   defp provider_module(:cerebras), do: ReqLLM.Providers.Cerebras
+  defp provider_module(:cloudflare_ai_gateway), do: ReqLLM.Providers.CloudflareAIGateway
   defp provider_module(:openai), do: ReqLLM.Providers.OpenAI
   defp provider_module(:google), do: ReqLLM.Providers.Google
   defp provider_module(:google_vertex), do: ReqLLM.Providers.GoogleVertex
