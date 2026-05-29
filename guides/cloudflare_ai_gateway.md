@@ -65,12 +65,18 @@ Override the account ID, gateway ID, or any CF header on a per-request basis via
   )
 ```
 
-`cf_account_id` and `cf_gateway_id` in `provider_options` take precedence over environment variables. You can also pass `base_url` directly to bypass URL construction entirely:
+`cf_account_id` and `cf_gateway_id` in `provider_options` take precedence over environment variables. You can also pass `base_url` as a top-level option to `generate_text` to bypass URL construction entirely:
 
 ```elixir
-provider_options: [],
-base_url: "https://gateway.ai.cloudflare.com/v1/acct123/gw456/openai"
+{:ok, response} =
+  ReqLLM.generate_text(
+    %{id: "gpt-4o", provider: :cloudflare_ai_gateway, model: "gpt-4o"},
+    "Hello!",
+    base_url: "https://gateway.ai.cloudflare.com/v1/acc123/gw456/openai"
+  )
 ```
+
+Note that `base_url` is a top-level option passed directly to `generate_text`, not inside `provider_options`.
 
 ## Authenticated Gateways
 

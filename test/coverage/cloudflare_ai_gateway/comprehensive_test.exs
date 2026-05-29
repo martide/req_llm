@@ -31,6 +31,11 @@ defmodule ReqLLM.Coverage.CloudflareAIGateway.ComprehensiveTest do
   @test_account "test-account"
   @test_gateway "test-gateway"
 
+  setup_all do
+    LLMDB.load(allow: :all, custom: %{})
+    :ok
+  end
+
   setup do
     # Ensure env vars are present for URL construction (not needed during fixture
     # replay since base_url is passed directly, but needed for RECORD mode)
@@ -89,6 +94,9 @@ defmodule ReqLLM.Coverage.CloudflareAIGateway.ComprehensiveTest do
       assert stream_response.stream
       assert stream_response.metadata_handle
 
+      finish_reason = ReqLLM.StreamResponse.finish_reason(stream_response)
+      refute is_nil(finish_reason)
+
       {:ok, response} = ReqLLM.StreamResponse.to_response(stream_response)
 
       assert %ReqLLM.Response{} = response
@@ -96,9 +104,6 @@ defmodule ReqLLM.Coverage.CloudflareAIGateway.ComprehensiveTest do
 
       text = ReqLLM.Response.text(response) || ""
       assert text != "", "Expected non-empty streaming text"
-
-      finish_reason = ReqLLM.StreamResponse.finish_reason(stream_response)
-      refute is_nil(finish_reason)
     end
   end
 end
