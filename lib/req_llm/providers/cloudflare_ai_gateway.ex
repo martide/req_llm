@@ -41,8 +41,6 @@ defmodule ReqLLM.Providers.CloudflareAIGateway do
     default_base_url: "https://gateway.ai.cloudflare.com/v1",
     default_env_key: "CLOUDFLARE_AI_GATEWAY_API_KEY"
 
-  @cf_gateway_base "https://gateway.ai.cloudflare.com/v1"
-
   @provider_schema [
     cf_account_id: [
       type: :string,
@@ -110,6 +108,7 @@ defmodule ReqLLM.Providers.CloudflareAIGateway do
          ) do
       {:ok, finch_req} ->
         cf_headers = build_cf_headers(provider_opts)
+        # Finch.Request.headers is a plain list; appending here is the correct extension point
         {:ok, %{finch_req | headers: finch_req.headers ++ cf_headers}}
 
       error ->
@@ -126,14 +125,14 @@ defmodule ReqLLM.Providers.CloudflareAIGateway do
         url
 
       account_from_opts && gateway_from_opts ->
-        "#{@cf_gateway_base}/#{account_from_opts}/#{gateway_from_opts}/openai"
+        "#{default_base_url()}/#{account_from_opts}/#{gateway_from_opts}/openai"
 
       true ->
         account = System.get_env("CF_ACCOUNT_ID")
         gateway = System.get_env("CF_GATEWAY_ID")
 
         if account && gateway do
-          "#{@cf_gateway_base}/#{account}/#{gateway}/openai"
+          "#{default_base_url()}/#{account}/#{gateway}/openai"
         else
           raise ReqLLM.Error.Invalid.Parameter.exception(
             parameter:
