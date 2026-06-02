@@ -1,0 +1,105 @@
+{
+  "model_spec": "cloudflare_ai_gateway:openai/gpt-4o",
+  "provider": "cloudflare_ai_gateway",
+  "request": {
+    "body": {
+      "b64": "eyJtYXhfdG9rZW5zIjoxMDAsIm1lc3NhZ2VzIjpbeyJjb250ZW50IjoiV3JpdGUgYSB2ZXJ5IGxvbmcgc3RvcnkgYWJvdXQgZHJhZ29ucyBhbmQgYWR2ZW50dXJlcyIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6Im9wZW5haS9ncHQtNG8iLCJzdHJlYW0iOmZhbHNlLCJ0ZW1wZXJhdHVyZSI6MC41fQ=="
+    },
+    "canonical_json": {
+      "max_tokens": 100,
+      "messages": [
+        {
+          "content": "Write a very long story about dragons and adventures",
+          "role": "user"
+        }
+      ],
+      "model": "openai/gpt-4o",
+      "stream": false,
+      "temperature": 0.5
+    },
+    "headers": {
+      "accept": [
+        "application/json"
+      ],
+      "accept-encoding": [
+        "gzip"
+      ],
+      "authorization": "[REDACTED:authorization]",
+      "content-type": [
+        "application/json"
+      ],
+      "user-agent": [
+        "req/0.5.18"
+      ]
+    },
+    "method": "post",
+    "url": "https://api.cloudflare.com/client/v4/accounts/04f2ecf92a8058e26d7f65f5f2819929/ai/v1/chat/completions"
+  },
+  "response": {
+    "body": {
+      "choices": [
+        {
+          "finish_reason": "length",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "annotations": [],
+            "content": "Title: **The Chronicles of Eldoria: The Dragon's Call**\n\n---\n\nIn the ancient land of Eldoria, where the sky was a tapestry of swirling colors and the earth sang with the whispers of magic, dragons soared through the heavens. These majestic creatures, with scales that shimmered like precious gemstones, were both feared and revered by all who dwelt beneath their shadow.\n\n### Chapter 1: The Whispering Winds\n\nThe village of Windmere lay nestled in the verdant foothills of the",
+            "refusal": null,
+            "role": "assistant"
+          }
+        }
+      ],
+      "created": 1780381666,
+      "id": "id-1780381666549",
+      "model": "openai/gpt-4o",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 100,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens": 16,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        },
+        "total_tokens": 116
+      }
+    },
+    "headers": {
+      "api-version": [
+        "2026-06-02"
+      ],
+      "cf-auditlog-id": [
+        "019e8704-4518-7ab9-908e-9beee1c7eb5d"
+      ],
+      "cf-ray": [
+        "a05464db4d30fec7-MNL"
+      ],
+      "connection": [
+        "keep-alive"
+      ],
+      "content-type": [
+        "application/json"
+      ],
+      "date": [
+        "Tue, 02 Jun 2026 06:27:46 GMT"
+      ],
+      "server": [
+        "cloudflare"
+      ],
+      "set-cookie": [
+        "__cf_bm=WNgCEzxR1HO5YNz2V8PEXV99k_udClod06K4VS7wVto-1780381664.5257082-1.0.1.1-NtcuN5zkXrqS5K9EvJ3_GGwOjENOv8l47p9HXdwkIMK76JVS0vfmdXkFiV1c5vyXo9A4ojx1NgE_.O8L2q3HlqUGnt_wayLnAQ7mhnTLlx.pfhSKff.9RvVa5Sc.ghoM; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.cloudflare.com; Expires=Tue, 02 Jun 2026 06:57:46 GMT",
+        "_cfuvid=juhOhTiXrMIRSfS.kFRTLRg6NB5zvfBHhKXraS.YBhw-1780381664.5257082-1.0.1.1-9p0Pkppa4Z7HGalUxSRoBEDxTWulSqE6cFwRxmQlOdw; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.cloudflare.com"
+      ],
+      "transfer-encoding": [
+        "chunked"
+      ]
+    },
+    "status": 200
+  }
+}

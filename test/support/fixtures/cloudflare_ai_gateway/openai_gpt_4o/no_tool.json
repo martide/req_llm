@@ -1,0 +1,127 @@
+{
+  "model_spec": "cloudflare_ai_gateway:openai/gpt-4o",
+  "provider": "cloudflare_ai_gateway",
+  "request": {
+    "body": {
+      "b64": "eyJtYXhfdG9rZW5zIjoxNjM4LCJtZXNzYWdlcyI6W3siY29udGVudCI6IlRlbGwgbWUgYSBqb2tlIGFib3V0IGNhdHMiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJvcGVuYWkvZ3B0LTRvIiwic2VlZCI6NDIsInN0cmVhbSI6ZmFsc2UsInRlbXBlcmF0dXJlIjowLjAsInRvb2xzIjpbeyJmdW5jdGlvbiI6eyJkZXNjcmlwdGlvbiI6IkdldCBjdXJyZW50IHdlYXRoZXIgaW5mb3JtYXRpb24gZm9yIGEgbG9jYXRpb24iLCJuYW1lIjoiZ2V0X3dlYXRoZXIiLCJwYXJhbWV0ZXJzIjp7ImFkZGl0aW9uYWxQcm9wZXJ0aWVzIjpmYWxzZSwicHJvcGVydGllcyI6eyJsb2NhdGlvbiI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJsb2NhdGlvbiJdLCJ0eXBlIjoib2JqZWN0In19LCJ0eXBlIjoiZnVuY3Rpb24ifV19"
+    },
+    "canonical_json": {
+      "max_tokens": 1638,
+      "messages": [
+        {
+          "content": "Tell me a joke about cats",
+          "role": "user"
+        }
+      ],
+      "model": "openai/gpt-4o",
+      "seed": 42,
+      "stream": false,
+      "temperature": 0.0,
+      "tools": [
+        {
+          "function": {
+            "description": "Get current weather information for a location",
+            "name": "get_weather",
+            "parameters": {
+              "additionalProperties": false,
+              "properties": {
+                "location": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "location"
+              ],
+              "type": "object"
+            }
+          },
+          "type": "function"
+        }
+      ]
+    },
+    "headers": {
+      "accept": [
+        "application/json"
+      ],
+      "accept-encoding": [
+        "gzip"
+      ],
+      "authorization": "[REDACTED:authorization]",
+      "content-type": [
+        "application/json"
+      ],
+      "user-agent": [
+        "req/0.5.18"
+      ]
+    },
+    "method": "post",
+    "url": "https://api.cloudflare.com/client/v4/accounts/04f2ecf92a8058e26d7f65f5f2819929/ai/v1/chat/completions"
+  },
+  "response": {
+    "body": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "annotations": [],
+            "content": "Why was the cat sitting on the computer?\n\nBecause it wanted to keep an eye on the mouse!",
+            "refusal": null,
+            "role": "assistant"
+          }
+        }
+      ],
+      "created": 1780381667,
+      "id": "id-1780381667799",
+      "model": "openai/gpt-4o",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 21,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        },
+        "total_tokens": 72
+      }
+    },
+    "headers": {
+      "api-version": [
+        "2026-06-02"
+      ],
+      "cf-auditlog-id": [
+        "019e8704-4e75-7e9b-addb-6cf1e486a0c6"
+      ],
+      "cf-ray": [
+        "a05464ea3c7efec7-MNL"
+      ],
+      "connection": [
+        "keep-alive"
+      ],
+      "content-type": [
+        "application/json"
+      ],
+      "date": [
+        "Tue, 02 Jun 2026 06:27:47 GMT"
+      ],
+      "server": [
+        "cloudflare"
+      ],
+      "set-cookie": [
+        "__cf_bm=DMuBJn3iqdkBWV4E7WuFDRcsO7BuWKQJpdikkfg5wc8-1780381666.9195378-1.0.1.1-ojWpNJlXZWkNcBrbpLmwYEeqT3APw8Bi_m0Bcop_5xOrMjFllMJwTMx6KQlBdpJpnuRISyma7ke2TyGIcQsZR8LErgmsMSzJUfY_zE8C4BoWw0kV5enEL4JEDsL2ruZ8; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.cloudflare.com; Expires=Tue, 02 Jun 2026 06:57:47 GMT",
+        "_cfuvid=6.dFF6l8dYDxgOD2hDFn9ZnmVA1m2n_342OmBi32lpk-1780381666.9195378-1.0.1.1-l_eaW271xSpoMCw1FGWRjtjW5YiclbMS.Wrjb4mtTH0; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.cloudflare.com"
+      ],
+      "transfer-encoding": [
+        "chunked"
+      ]
+    },
+    "status": 200
+  }
+}

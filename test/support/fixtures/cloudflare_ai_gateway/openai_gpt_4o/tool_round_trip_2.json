@@ -1,0 +1,129 @@
+{
+  "model_spec": "cloudflare_ai_gateway:openai/gpt-4o",
+  "provider": "cloudflare_ai_gateway",
+  "request": {
+    "body": {
+      "b64": "eyJtYXhfdG9rZW5zIjoxNjM4LCJtZXNzYWdlcyI6W3siY29udGVudCI6IlVzZSB0aGUgYWRkIHRvb2wgdG8gY29tcHV0ZSAyICsgMy4gQWZ0ZXIgdGhlIHRvb2wgcmVzdWx0IGFycml2ZXMsIHJlc3BvbmQgd2l0aCAnc3VtPTx2YWx1ZT4nLiIsInJvbGUiOiJ1c2VyIn0seyJjb250ZW50IjoiIiwicm9sZSI6ImFzc2lzdGFudCIsInRvb2xfY2FsbHMiOlt7ImZ1bmN0aW9uIjp7ImFyZ3VtZW50cyI6IntcImFcIjoyLFwiYlwiOjN9IiwibmFtZSI6ImFkZCJ9LCJpZCI6ImNhbGxfU1lYM0tCWVJLZVNZRkt0dDRzcHNldmZUIiwidHlwZSI6ImZ1bmN0aW9uIn1dfSx7ImNvbnRlbnQiOiI1IiwibWV0YWRhdGEiOnsidG9vbF9vdXRwdXQiOjV9LCJuYW1lIjoiYWRkIiwicm9sZSI6InRvb2wiLCJ0b29sX2NhbGxfaWQiOiJjYWxsX1NZWDNLQllSS2VTWUZLdHQ0c3BzZXZmVCJ9XSwibW9kZWwiOiJvcGVuYWkvZ3B0LTRvIiwic2VlZCI6NDIsInN0cmVhbSI6ZmFsc2UsInRlbXBlcmF0dXJlIjowLjB9"
+    },
+    "canonical_json": {
+      "max_tokens": 1638,
+      "messages": [
+        {
+          "content": "Use the add tool to compute 2 + 3. After the tool result arrives, respond with 'sum=<value>'.",
+          "role": "user"
+        },
+        {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"a\":2,\"b\":3}",
+                "name": "add"
+              },
+              "id": "call_SYX3KBYRKeSYFKtt4spsevfT",
+              "type": "function"
+            }
+          ]
+        },
+        {
+          "content": "5",
+          "metadata": {
+            "tool_output": 5
+          },
+          "name": "add",
+          "role": "tool",
+          "tool_call_id": "call_SYX3KBYRKeSYFKtt4spsevfT"
+        }
+      ],
+      "model": "openai/gpt-4o",
+      "seed": 42,
+      "stream": false,
+      "temperature": 0.0
+    },
+    "headers": {
+      "accept": [
+        "application/json"
+      ],
+      "accept-encoding": [
+        "gzip"
+      ],
+      "authorization": "[REDACTED:authorization]",
+      "content-type": [
+        "application/json"
+      ],
+      "user-agent": [
+        "req/0.5.18"
+      ]
+    },
+    "method": "post",
+    "url": "https://api.cloudflare.com/client/v4/accounts/04f2ecf92a8058e26d7f65f5f2819929/ai/v1/chat/completions"
+  },
+  "response": {
+    "body": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "annotations": [],
+            "content": "sum=5",
+            "refusal": null,
+            "role": "assistant"
+          }
+        }
+      ],
+      "created": 1780381999,
+      "id": "id-1780381999142",
+      "model": "openai/gpt-4o",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 3,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens": 57,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        },
+        "total_tokens": 60
+      }
+    },
+    "headers": {
+      "api-version": [
+        "2026-06-02"
+      ],
+      "cf-auditlog-id": [
+        "019e8709-5cc0-7fb1-a47a-060ad24bcfbb"
+      ],
+      "cf-ray": [
+        "a0546d011e9ffec5-MNL"
+      ],
+      "connection": [
+        "keep-alive"
+      ],
+      "content-type": [
+        "application/json"
+      ],
+      "date": [
+        "Tue, 02 Jun 2026 06:33:19 GMT"
+      ],
+      "server": [
+        "cloudflare"
+      ],
+      "set-cookie": [
+        "__cf_bm=KNc1PBcakHEhnDNJ7d9jA4nYGFT2mzZcBKUYp3NTI1w-1780381998.259352-1.0.1.1-9aQniIQVRxt5YYgOjMDAARwAtx5aCFvNXYsM_fqXRmM7V33Kav2cTayBRtcWWXZluGdvQYMg9F7Yop8oPlV.E1miLMqvoJj42DAIADztHGrKmD4SGMVynNjaqq77YPRY; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.cloudflare.com; Expires=Tue, 02 Jun 2026 07:03:19 GMT",
+        "_cfuvid=OkRzOOlDCDwplxLL3X0Z68jW4nlfiK84qpj5uWUoskc-1780381998.259352-1.0.1.1-nMX_L89gFXlxb0oVV.w2voCHYy.p1IiWzAY4RZNguVQ; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.cloudflare.com"
+      ],
+      "transfer-encoding": [
+        "chunked"
+      ]
+    },
+    "status": 200
+  }
+}

@@ -330,6 +330,7 @@ config :req_llm, :sample_text_models, ~w(
     anthropic:claude-haiku-4-5
     openai:gpt-4o-mini
     google:gemini-2.0-flash
+    cloudflare_ai_gateway:openai/gpt-4o
   )
 config :req_llm, :test_sample_per_provider, 1
 
