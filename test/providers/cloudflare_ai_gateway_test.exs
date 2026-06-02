@@ -35,6 +35,47 @@ defmodule ReqLLM.Providers.CloudflareAIGatewayTest do
     end
   end
 
+  describe "tool_choice normalization for the OpenAI-compatible endpoint" do
+    defp encoded_tool_choice(tool_choice) do
+      model = make_model()
+
+      tools = [
+        ReqLLM.tool(
+          name: "add",
+          description: "Add",
+          parameter_schema: [],
+          callback: fn _ -> {:ok, 0} end
+        )
+      ]
+
+      {:ok, ctx} = ReqLLM.Context.normalize("hi")
+
+      {:ok, request} =
+        CloudflareAIGateway.prepare_request(:chat, model, ctx,
+          provider_options: [cf_account_id: "acc"],
+          tools: tools,
+          tool_choice: tool_choice
+        )
+
+      request
+      |> CloudflareAIGateway.encode_body()
+      |> Req.Steps.encode_body()
+      |> Map.fetch!(:body)
+      |> IO.iodata_to_binary()
+      |> Jason.decode!()
+      |> Map.get("tool_choice")
+    end
+
+    test "forced %{type: \"tool\", name: ...} becomes OpenAI's {type: function, function: {name}}" do
+      assert encoded_tool_choice(%{type: "tool", name: "add"}) ==
+               %{"type" => "function", "function" => %{"name" => "add"}}
+    end
+
+    test "\"required\" passes through unchanged" do
+      assert encoded_tool_choice("required") == "required"
+    end
+  end
+
   # The REST API base URL is resolved in prepare_request/4 (before Options.process),
   # so URL construction is exercised there rather than in attach/3.
   describe "URL construction from provider_options" do

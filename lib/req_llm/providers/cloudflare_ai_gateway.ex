@@ -137,6 +137,27 @@ defmodule ReqLLM.Providers.CloudflareAIGateway do
     )
   end
 
+  @impl ReqLLM.Provider
+  def build_body(request) do
+    request
+    |> ReqLLM.Provider.Defaults.default_build_body()
+    |> normalize_tool_choice()
+  end
+
+  # The default body encoder passes tool_choice through verbatim, but the REST API's
+  # OpenAI-compatible endpoint expects OpenAI's forced-tool shape. Translate ReqLLM's
+  # canonical %{type: "tool", name: name} form accordingly; anything already valid
+  # ("auto", "required", %{type: "function", ...}) passes through untouched.
+  defp normalize_tool_choice(%{tool_choice: %{type: "tool", name: name}} = body)
+       when is_binary(name),
+       do: %{body | tool_choice: %{type: "function", function: %{name: name}}}
+
+  defp normalize_tool_choice(%{tool_choice: %{"type" => "tool", "name" => name}} = body)
+       when is_binary(name),
+       do: %{body | tool_choice: %{"type" => "function", "function" => %{"name" => name}}}
+
+  defp normalize_tool_choice(body), do: body
+
   # Builds the REST API base URL from the account ID. The default `prepare_request`
   # appends "/chat/completions", yielding `.../accounts/{account}/ai/v1/chat/completions`.
   defp resolve_base_url(provider_opts) do
