@@ -45,6 +45,28 @@ defmodule ReqLLM.Streaming.HTTP2ValidationTest do
       assert {:ok, _task_pid, _http_context, _canonical_json} = result
     end
 
+    test "handles iodata request bodies (default_attach_stream providers) without raising" do
+      # Providers that use default_attach_stream encode the body as iodata (an iolist),
+      # not a binary. validate_http2_body_size must size the body with IO.iodata_length/1,
+      # not byte_size/1 — byte_size/1 raises ArgumentError ("not a bitstring") on an iolist.
+      configure_http1_pools!()
+
+      System.put_env("CF_ACCOUNT_ID", "test-account")
+      System.put_env("CLOUDFLARE_AI_GATEWAY_API_KEY", "test-key")
+
+      on_exit(fn ->
+        System.delete_env("CF_ACCOUNT_ID")
+        System.delete_env("CLOUDFLARE_AI_GATEWAY_API_KEY")
+      end)
+
+      {:ok, model} = ReqLLM.model("cloudflare_ai_gateway:openai/gpt-4o")
+      {:ok, context} = Context.normalize("Hello")
+
+      result = start_mock_stream(ReqLLM.Providers.CloudflareAIGateway, model, context)
+
+      assert {:ok, _task_pid, _http_context, _canonical_json} = result
+    end
+
     test "error is caught by streaming module and logged" do
       configure_http2_pools!()
 
@@ -73,11 +95,14 @@ defmodule ReqLLM.Streaming.HTTP2ValidationTest do
     end
   end
 
-  defp start_mock_stream(model, context) do
+  defp start_mock_stream(model, context),
+    do: start_mock_stream(ReqLLM.Providers.OpenAI, model, context)
+
+  defp start_mock_stream(provider, model, context) do
     {:ok, stream_server} = MockStreamServer.start_link()
 
     FinchClient.start_stream(
-      ReqLLM.Providers.OpenAI,
+      provider,
       model,
       context,
       [],
