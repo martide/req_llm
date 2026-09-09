@@ -4,10 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    open-pull-requests-limit: 10
     labels:
       - "dependencies"
       - "elixir"
     commit-message:
       prefix: "deps"
-      include: "scope" 
+      include: "scope"
+    groups:
+      elixir:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
