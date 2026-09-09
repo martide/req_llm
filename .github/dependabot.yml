@@ -3,11 +3,14 @@ updates:
   - package-ecosystem: "mix"
     directory: "/"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 10
+      interval: "monthly"
     labels:
       - "dependencies"
       - "elixir"
     commit-message:
       prefix: "deps"
-      include: "scope" 
+      include: "scope"
+    groups:
+      elixir:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
